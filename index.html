@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diet Effects on Testosterone Levels</title>
+    <title>Diet & Testosterone Levels</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Diet & Testosterone Levels</h1>
-        <h2>Input Your Dietary Details</h2>
+        <h2>Input Your Details</h2>
 
         <div class="input-group">
             <label for="kd-days">Days on Ketogenic Diet:</label>
@@ -39,6 +39,12 @@
         <div class="input-group">
             <label for="zinc-days">Days supplementing Zinc:</label>
             <input type="number" id="zinc-days" placeholder="Enter days">
+        </div>
+
+        <div class="input-group">
+            <label for="step-count">Daily Steps:</label>
+            <input type="range" id="step-count" min="0" max="30000" step="100" value="10000" oninput="document.getElementById('step-count-display').innerText = this.value">
+            <p>Selected Steps: <span id="step-count-display">10000</span></p>
         </div>
 
         <button id="calculate">Calculate Effects</button>

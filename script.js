@@ -5,6 +5,7 @@ document.getElementById("calculate").addEventListener("click", function () {
     const spDays = parseInt(document.getElementById("sp-days").value) || 0;
     const vitaminDDays = parseInt(document.getElementById("vitamin-d-days").value) || 0;
     const zincDays = parseInt(document.getElementById("zinc-days").value) || 0;
+    const steps = parseInt(document.getElementById("step-count").value) || 0;
 
     const results = [];
 
@@ -38,6 +39,11 @@ document.getElementById("calculate").addEventListener("click", function () {
         results.push(`Zinc: Testosterone Change: ${zincChange.toFixed(2)} ng/dL`);
     }
 
+    if (steps > 0) {
+        const stepChange = calculateStepBasedTestosteroneChange(steps);
+        results.push(`Steps: Testosterone Increase: ${stepChange.toFixed(2)} ng/dL`);
+    }
+
     document.getElementById("result").innerHTML = results.length > 0 ?
         `<ul>${results.map(r => `<li>${r}</li>`).join('')}</ul>` :
         "<p>No data entered or no effects calculated.</p>";
@@ -68,4 +74,9 @@ function calculateTestosteroneChange(intervention, days) {
 
     const pooledSD = Math.sqrt((Math.pow(sdPrePost[intervention].sdPre, 2) + Math.pow(sdPrePost[intervention].sdPost, 2)) / 2);
     return effectSize * pooledSD * 28.845; // Convert to ng/dL
+}
+
+function calculateStepBasedTestosteroneChange(steps) {
+    const ttIncreasePer1000Steps = 7; // ng/dL increase per 1000 steps
+    return (steps / 1000) * ttIncreasePer1000Steps;
 }
